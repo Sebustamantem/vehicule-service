@@ -1,4 +1,4 @@
-package vehicle.service.model
+package vehicle_service.model
 
 import jakarta.persistence.*
 
@@ -34,7 +34,6 @@ data class Vehicle(
     @Column(nullable = false)
     val revisionTecnicaDate: String,
 
-    // Asociado al usuario dueño del auto
     @Column(nullable = false)
     val userId: Long
 )

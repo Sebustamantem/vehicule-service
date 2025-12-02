@@ -1,8 +1,8 @@
-package vehicle.service.controller
+package vehicle_service.controller
 
 import org.springframework.web.bind.annotation.*
-import vehicle.service.dto.VehicleRequest
-import vehicle.service.service.VehicleService
+import vehicle_service.dto.VehicleRequest
+import vehicle_service.service.VehicleService
 
 @RestController
 @RequestMapping("/vehicles")
@@ -14,8 +14,8 @@ class VehicleController(
     fun create(@RequestBody request: VehicleRequest) =
         service.create(request)
 
-    @GetMapping("/{userId}")
-    fun list(@PathVariable userId: Long) =
+    @GetMapping("/user/{userId}")
+    fun listByUser(@PathVariable userId: Long) =
         service.listByUser(userId)
 
     @DeleteMapping("/{id}")

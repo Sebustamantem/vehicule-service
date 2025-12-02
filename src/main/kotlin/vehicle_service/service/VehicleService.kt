@@ -1,12 +1,12 @@
-package vehicle.service.service
+package vehicle_service.service
 
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
-import vehicle.service.dto.VehicleRequest
-import vehicle.service.dto.VehicleResponse
-import vehicle.service.model.Vehicle
-import vehicle.service.repository.VehicleRepository
+import vehicle_service.dto.VehicleRequest
+import vehicle_service.dto.VehicleResponse
+import vehicle_service.model.Vehicle
+import vehicle_service.repository.VehicleRepository
 
 @Service
 class VehicleService(
@@ -32,7 +32,6 @@ class VehicleService(
         )
 
         val saved = repo.save(vehicle)
-
         return saved.toResponse()
     }
 
@@ -43,7 +42,6 @@ class VehicleService(
         if (!repo.existsById(id)) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, "Vehículo no encontrado")
         }
-
         repo.deleteById(id)
     }
 
