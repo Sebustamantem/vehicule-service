@@ -6,9 +6,10 @@ data class VehicleResponse(
     val model: String,
     val year: Int,
     val plate: String,
-    val km: String,
+    val km: Int,  
     val soapDate: String,
     val permisoCirculacionDate: String,
     val revisionTecnicaDate: String,
     val userId: Long
 )
+

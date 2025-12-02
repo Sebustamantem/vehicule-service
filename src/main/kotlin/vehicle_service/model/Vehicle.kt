@@ -23,7 +23,7 @@ data class Vehicle(
     val plate: String,
 
     @Column(nullable = false)
-    val km: String,
+    val km: Int,   // ⬅ km ahora es INT
 
     @Column(nullable = false)
     val soapDate: String,
