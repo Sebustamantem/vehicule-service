@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: vehicule-service
+  cloud:
+    config:
+      uri: https://config-server-bph7.onrender.com
+      enabled: true

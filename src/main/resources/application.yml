@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: vehicule-service
+
+  cloud:
+    config:
+      enabled: true
+
+  config:
+    import: "configserver:https://config-server-bph7.onrender.com"
+
+server:
+  port: 8080
+
