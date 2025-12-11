@@ -43,24 +43,27 @@ class VehicleService(
             ResponseStatusException(HttpStatus.NOT_FOUND, "Vehículo no encontrado")
         }
 
-  
+        // Validar que la nueva patente no esté usada por otro vehículo
         if (repo.existsByPlateAndIdNot(request.plate, id)) {
             throw ResponseStatusException(HttpStatus.CONFLICT, "La patente ya existe en otro vehículo")
         }
 
-        vehicle.apply {
-            brand = request.brand
-            model = request.model
-            year = request.year
-            plate = request.plate
-            km = request.km
-            soapDate = request.soapDate
-            permisoCirculacionDate = request.permisoCirculacionDate
-            revisionTecnicaDate = request.revisionTecnicaDate
+        // ⚠️ AQUÍ ESTABA EL PROBLEMA: ya no usamos apply sobre 'vehicle'
+        // Creamos una nueva instancia con los datos actualizados
+        val updatedVehicle = Vehicle(
+            id = vehicle.id,  // mantener el mismo ID
+            brand = request.brand,
+            model = request.model,
+            year = request.year,
+            plate = request.plate,
+            km = request.km,
+            soapDate = request.soapDate,
+            permisoCirculacionDate = request.permisoCirculacionDate,
+            revisionTecnicaDate = request.revisionTecnicaDate,
             userId = request.userId
-        }
+        )
 
-        val saved = repo.save(vehicle)
+        val saved = repo.save(updatedVehicle)
         return saved.toResponse()
     }
 
