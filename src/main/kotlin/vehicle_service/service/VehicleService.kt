@@ -38,6 +38,32 @@ class VehicleService(
     fun listByUser(userId: Long): List<VehicleResponse> =
         repo.findByUserId(userId).map { it.toResponse() }
 
+    fun update(id: Long, request: VehicleRequest): VehicleResponse {
+        val vehicle = repo.findById(id).orElseThrow {
+            ResponseStatusException(HttpStatus.NOT_FOUND, "Vehículo no encontrado")
+        }
+
+  
+        if (repo.existsByPlateAndIdNot(request.plate, id)) {
+            throw ResponseStatusException(HttpStatus.CONFLICT, "La patente ya existe en otro vehículo")
+        }
+
+        vehicle.apply {
+            brand = request.brand
+            model = request.model
+            year = request.year
+            plate = request.plate
+            km = request.km
+            soapDate = request.soapDate
+            permisoCirculacionDate = request.permisoCirculacionDate
+            revisionTecnicaDate = request.revisionTecnicaDate
+            userId = request.userId
+        }
+
+        val saved = repo.save(vehicle)
+        return saved.toResponse()
+    }
+
     fun delete(id: Long) {
         if (!repo.existsById(id)) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, "Vehículo no encontrado")

@@ -18,6 +18,12 @@ class VehicleController(
     fun listByUser(@PathVariable userId: Long) =
         service.listByUser(userId)
 
+    @PutMapping("/{id}")
+    fun update(
+        @PathVariable id: Long,
+        @RequestBody request: VehicleRequest
+    ) = service.update(id, request)
+
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: Long) =
         service.delete(id)
